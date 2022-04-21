@@ -37,6 +37,7 @@ body,input,button {
 } 
 
 button{
+    border: none;
     cursor: pointer;
 }
 
