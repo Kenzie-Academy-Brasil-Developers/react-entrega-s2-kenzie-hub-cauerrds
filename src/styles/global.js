@@ -32,8 +32,8 @@ body{
 }
 
 body,input,button {
-    font-family: 'inter';
-    font-family: normal;
+    font-family: "inter";
+    font-size: 1rem;
 } 
 
 button{

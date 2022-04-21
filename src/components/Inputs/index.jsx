@@ -1,13 +1,13 @@
 import { Container, InputContainer } from "./styles";
 
-const Input = ({ label, icon, ...rest }) => {
+const Inputs = ({ label, icon, ...rest }) => {
   return (
     <Container>
-      <div>{label}</div>
+      <div className="label">{label}</div>
       <InputContainer>
         <input {...rest} />
       </InputContainer>
     </Container>
   );
 };
-export { Input };
+export { Inputs };
