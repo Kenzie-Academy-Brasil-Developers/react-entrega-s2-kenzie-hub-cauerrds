@@ -19,6 +19,7 @@ export const InputContainer = styled.div`
   }
 
   input {
+    width: 100%;
     height: 38px;
     background: transparent;
     align-items: center;
