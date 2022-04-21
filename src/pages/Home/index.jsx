@@ -2,6 +2,7 @@ import { AnimationContainer, Container } from "./styles";
 import { Content } from "./styles";
 
 import logo from "../../assets/logo.svg";
+import { FaEye } from "react-icons/fa";
 
 import { Inputs } from "../../components/Inputs";
 import { Button } from "../../components/Buttons";
@@ -15,7 +16,12 @@ const Home = () => {
           <form>
             <h1>Login</h1>
             <Inputs label="Email" placeholder="caue_rrds@kenzie.com" />
-            <Inputs type="password" label="Senha" placeholder="Sua senha" />
+            <Inputs
+              icon={FaEye}
+              type="password"
+              label="Senha"
+              placeholder="Sua senha"
+            />
             <Button
               backGround="#FF577F"
               textColor="#FFFFFF"

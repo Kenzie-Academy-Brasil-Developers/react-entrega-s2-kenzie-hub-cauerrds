@@ -11,10 +11,13 @@ export const InputContainer = styled.div`
   color: var(--grey5);
   width: 100%;
   display: flex;
+  align-items: center;
+  padding-right: 1rem;
   /* transition: ; */
   &:focus-within {
     border: 2px solid var(--grey5);
   }
+
   input {
     height: 38px;
     background: transparent;
@@ -27,5 +30,10 @@ export const InputContainer = styled.div`
       color: var(--grey4);
       font-size: 0.8rem;
     }
+  }
+
+  svg {
+    color: var(--greyFont);
+    cursor: pointer;
   }
 `;
