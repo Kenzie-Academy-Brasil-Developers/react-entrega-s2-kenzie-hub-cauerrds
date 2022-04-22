@@ -5,6 +5,7 @@ const Button = ({
   backGround,
   textColor,
   backGroundHover,
+  icon: Icon,
   ...rest
 }) => {
   return (
@@ -16,6 +17,7 @@ const Button = ({
       {...rest}
     >
       {children}
+      {Icon && <Icon />}
     </Container>
   );
 };
