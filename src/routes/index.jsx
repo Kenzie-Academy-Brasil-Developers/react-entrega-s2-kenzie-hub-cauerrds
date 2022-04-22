@@ -6,7 +6,8 @@ import { Home } from "../pages/Home";
 const RoutesComponent = () => {
   return (
     <Routes>
-      <Route exact path="/" element={<Cadastro />} />
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/cadastro" element={<Cadastro />} />
     </Routes>
   );
 };

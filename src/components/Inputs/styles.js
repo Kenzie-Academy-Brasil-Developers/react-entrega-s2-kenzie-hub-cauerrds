@@ -33,6 +33,17 @@ export const InputContainer = styled.div`
     }
   }
 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--white);
+    -webkit-box-shadow: none;
+    transition: background-color 86400s;
+  }
+
   svg {
     color: var(--greyFont);
     cursor: pointer;

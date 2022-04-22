@@ -14,7 +14,7 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 370px;
+  max-width: 450px;
   margin: auto;
 
   .logoDiv {
@@ -84,6 +84,22 @@ export const AnimationContainer = styled.div`
       }
       svg {
         color: #ffffff;
+      }
+    }
+    .bioDiv {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+
+      textarea {
+        margin-top: 15px;
+        height: 80px;
+        max-height: 80px;
+        background-color: var(--grey3);
+        outline: none;
+        border: none;
+        padding: 1rem;
+        resize: none;
       }
     }
   }
