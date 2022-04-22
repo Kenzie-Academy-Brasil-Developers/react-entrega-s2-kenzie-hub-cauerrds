@@ -10,6 +10,8 @@ import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router";
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 const options = [
   { value: "Primeiro módulo (Introdução ao Frontend)", label: "Modulo 1" },
@@ -55,14 +57,14 @@ const Cadastro = () => {
       .max(35),
     password: yup
       .string()
-      .required("Senha Obrigatório")
+      .required("Campo Obrigatório!")
       .matches(
         "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$",
         "Senha deve conter no mínimo 8 caracteres, um maiúsculo, um minúsculo, um número e um caractere especial"
       ),
     passwordConfirm: yup
       .string()
-      .required("Confirmação de senha Obrigatório")
+      .required("Campo Obrigatório!")
       .oneOf([yup.ref("password"), null], "Confirmação deve ser igual a senha")
       .matches(
         "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$",
@@ -82,8 +84,21 @@ const Cadastro = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmitFnc = (data) => {
-    console.log(data);
+  const onSubmitFnc = ({
+    name,
+    email,
+    password,
+    contact,
+    bio,
+    course_module,
+  }) => {
+    const user = { name, email, password, contact, bio, course_module };
+    api
+      .post("/users", user)
+      .then((_) => toast.success("Conta criada com sucesso!"))
+      .catch((err) => {
+        toast.error("Ops! Algo deu errado");
+      });
   };
 
   return (
@@ -109,6 +124,7 @@ const Cadastro = () => {
               name="name"
               label="Nome"
               placeholder="Ex: Cauê Rafael"
+              error={errors.name?.message}
             />
 
             <Inputs
@@ -116,6 +132,7 @@ const Cadastro = () => {
               name="email"
               label="Email"
               placeholder="Ex: caue_rrds@kenzie.com"
+              error={errors.email?.message}
             />
             <Inputs
               register={register}
@@ -124,6 +141,7 @@ const Cadastro = () => {
               type="password"
               label="Senha"
               placeholder="Sua senha"
+              error={errors.password?.message}
             />
             <Inputs
               register={register}
@@ -132,19 +150,26 @@ const Cadastro = () => {
               type="password"
               label="Confirmar senha"
               placeholder="Confirme sua senha"
+              error={errors.passwordConfirm?.message}
             />
             <div className="selectDiv">
               <p>
                 Selecione seu módulo
-                {!!errors && <span>{errors.module?.message}</span>}
+                {errors.course_module ? (
+                  <span> - {errors.course_module?.message}</span>
+                ) : (
+                  ""
+                )}
               </p>
 
               <Controller
                 control={control}
-                render={({ field: { onChange, value } }) => (
+                render={({ field: { onChange, value, name, ref } }) => (
                   <Select
                     theme={optionsTheme}
-                    value={options.find((module) => module.value === value)}
+                    value={options.find(
+                      (course_module) => course_module.value === value
+                    )}
                     options={options}
                     name={"course_module"}
                     onChange={(options) => {
@@ -162,9 +187,17 @@ const Cadastro = () => {
               name="contact"
               label="Contato"
               placeholder="Ex: www.linkedin.com/in/cau%C3%AA-rafael-rodrigues-dos-santos-3b7a84157"
+              error={errors.contact?.message}
             />
             <div className="bioDiv">
-              <label htmlFor="bio">Sobre você</label>
+              <label htmlFor="bio">
+                Sobre você{" "}
+                {errors.bio ? (
+                  <span> - {errors.course_module?.message}</span>
+                ) : (
+                  ""
+                )}{" "}
+              </label>
               <textarea
                 name={"bio"}
                 {...register("bio")}

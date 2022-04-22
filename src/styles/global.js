@@ -25,6 +25,11 @@ export default createGlobalStyle`
     --white: #F8F9FA;
     --greyFont: #868E96;
     --pinkFont: #FF577F;
+
+    --toastify-color-light: #343B41;
+    --toastify-color-error: var(--pinkFeedback);
+    --toastify-text-color-light: #F8F9FA;
+    --toastify-font-family: 'inter';
 }
 
 body{

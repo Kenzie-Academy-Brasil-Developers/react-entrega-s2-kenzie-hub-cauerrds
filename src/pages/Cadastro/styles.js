@@ -100,7 +100,12 @@ export const AnimationContainer = styled.div`
         border: none;
         padding: 1rem;
         resize: none;
+        color: var(--white);
       }
+    }
+
+    span {
+      color: var(--pinkFeedback);
     }
   }
 
