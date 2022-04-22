@@ -7,6 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../Buttons";
+import { AiOutlineClose } from "react-icons/ai";
 
 const options = [
   { value: "Iniciante", label: "Iniciante" },
@@ -62,14 +63,19 @@ const TecnologiaCadastro = () => {
     <Container>
       <Content>
         <div className="tituloDiv">
-          <form onSubmit={handleSubmit(onSubmitFnc)}>
-            <Inputs
-              register={register}
-              name="title"
-              label="Nome"
-              placeholder="Ex: Javascript"
-              //   error={errors.name?.message}
-            />
+          <h1>Cadastrar Tecnologia</h1>
+          {/* <span>{AiOutlineClose}</span> */}
+        </div>
+        <form onSubmit={handleSubmit(onSubmitFnc)}>
+          <Inputs
+            register={register}
+            name="title"
+            label="Nome"
+            placeholder="Ex: Javascript"
+            //   error={errors.name?.message}
+          />
+          <div className="selectStatusDiv">
+            <p>Selecionar status</p>
             <Controller
               control={control}
               render={({ field: { onChange, value, name, ref } }) => (
@@ -87,16 +93,16 @@ const TecnologiaCadastro = () => {
               )}
               name={"status"}
             />
-            <Button
-              type="submit"
-              backGround="#59323F"
-              textColor="#FFFFFF"
-              backGroundHover="#FF427F"
-            >
-              Cadastrar Tecnologia
-            </Button>
-          </form>
-        </div>
+          </div>
+          <Button
+            type="submit"
+            backGround="#59323F"
+            textColor="#FFFFFF"
+            backGroundHover="#FF427F"
+          >
+            Cadastrar Tecnologia
+          </Button>
+        </form>
       </Content>
     </Container>
   );

@@ -1,15 +1,25 @@
 import { useParams } from "react-router";
 
 import { Button } from "../../components/Buttons";
+import { TecnologiaCadastro } from "../../components/ TecnologiaCadastro";
 
 import { Container, Header, DataHeader, Content } from "./styles";
 import logo from "../../assets/logo.svg";
 import { BiPlusMedical } from "react-icons/bi";
 
+import { useState } from "react";
+
 const Home = () => {
   const { username } = useParams();
+  const [showTecnologiaCadastro, setShowTecnologiaCadastro] = useState(false);
+
+  const handleClick = () => {
+    setShowTecnologiaCadastro(!showTecnologiaCadastro);
+  };
+
   return (
     <Container>
+      {showTecnologiaCadastro && <TecnologiaCadastro />}
       <Header>
         <div className="headerDiv">
           <img src={logo} alt="Logo Kenzie-hub" />
@@ -28,6 +38,7 @@ const Home = () => {
           <h2>Modulo salvo no storage</h2>
         </div>
       </DataHeader>
+
       <Content>
         <div className="contentDiv">
           <div className="tecnologiasDiv">
@@ -37,6 +48,7 @@ const Home = () => {
               textColor="#F8F9FA"
               backGroundHover="#343B41"
               icon={BiPlusMedical}
+              onClick={handleClick}
             ></Button>
           </div>
           <div className="listaDiv"></div>
