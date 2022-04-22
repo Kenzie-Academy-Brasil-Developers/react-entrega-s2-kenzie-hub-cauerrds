@@ -10,6 +10,7 @@ export const Header = styled.header`
   padding: 1rem;
   .headerDiv {
     margin: auto;
+    padding: 1rem;
     max-width: 1100px;
     display: flex;
     justify-content: space-between;
@@ -28,6 +29,7 @@ export const DataHeader = styled.div`
   height: 120px;
 
   .dataHeaderDiv {
+    padding: 1rem;
     margin: auto;
     max-width: 1100px;
     display: flex;
@@ -52,7 +54,7 @@ export const Content = styled.div`
   .contentDiv {
     margin: auto;
     max-width: 1100px;
-    padding: 1rem 0;
+    padding: 1rem;
     .tecnologiasDiv {
       display: flex;
       justify-content: space-between;
