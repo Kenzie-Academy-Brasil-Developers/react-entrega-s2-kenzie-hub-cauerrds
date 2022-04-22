@@ -95,7 +95,10 @@ const Cadastro = () => {
     const user = { name, email, password, contact, bio, course_module };
     api
       .post("/users", user)
-      .then((_) => toast.success("Conta criada com sucesso!"))
+      .then((response) => {
+        toast.success("Conta criada com sucesso!");
+        history(`/home/${response.data.name}`);
+      })
       .catch((err) => {
         toast.error("Ops! Algo deu errado");
       });
