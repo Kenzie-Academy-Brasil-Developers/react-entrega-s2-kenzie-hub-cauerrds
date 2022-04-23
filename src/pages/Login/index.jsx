@@ -13,7 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Login = ({ autenticacao, setAutenticacao }) => {
   const history = useNavigate();

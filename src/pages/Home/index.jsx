@@ -47,7 +47,7 @@ const Home = ({ autenticacao, setAutenticacao }) => {
   };
 
   useEffect(() => {
-    return handletecnologias;
+    handletecnologias();
   }, []);
 
   return (
