@@ -29,6 +29,11 @@ const Login = ({ autenticacao, setAutenticacao }) => {
     }
   };
 
+  const handleClickCadastro = () => {
+    localStorage.clear();
+    history("/cadastro");
+  };
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -116,7 +121,7 @@ const Login = ({ autenticacao, setAutenticacao }) => {
               backGround="#868E96"
               textColor="#F8F9FA"
               backGroundHover="#343B41"
-              onClick={() => history("/cadastro")}
+              onClick={handleClickCadastro}
             >
               Cadastre-se
             </Button>
