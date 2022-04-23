@@ -8,6 +8,11 @@ export const Container = styled.div`
   padding: 1rem;
   border-radius: 4px;
 
+  &:hover {
+    cursor: pointer;
+    background-color: var(--grey3);
+  }
+
   h1 {
     font-size: 1rem;
     color: var(--white);
