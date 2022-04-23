@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import { Button } from "../../components/Buttons";
 import { TecnologiaCadastro } from "../../components/ TecnologiaCadastro";
@@ -6,24 +6,71 @@ import { TecnologiaCadastro } from "../../components/ TecnologiaCadastro";
 import { Container, Header, DataHeader, Content } from "./styles";
 import logo from "../../assets/logo.svg";
 import { BiPlusMedical } from "react-icons/bi";
+import { api } from "../../services/api";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { CardTecnologia } from "../../components/CardTecnologia";
+import { TecnologiaEditar } from "../../components/TecnologiaEditar";
 
-const Home = () => {
+const Home = ({ autenticacao, setAutenticacao }) => {
   const { username } = useParams();
   const [showTecnologiaCadastro, setShowTecnologiaCadastro] = useState(false);
+  const [showTecnologiaEditar, setShowTecnologiaEditar] = useState(false);
+  const [tecnologias, setTecnologias] = useState([]);
+  const [idTecnologia, setIdTecnologia] = useState();
+  const history = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("@kenzieHub:user"));
 
   const handleClick = () => {
     setShowTecnologiaCadastro(!showTecnologiaCadastro);
   };
 
+  const handleClickEditar = (e) => {
+    setShowTecnologiaEditar(!showTecnologiaEditar);
+    setIdTecnologia(e.target.id);
+  };
+  const handleLogOut = () => {
+    localStorage.clear();
+    history("/");
+  };
+
+  if (!autenticacao) {
+    history(`/`);
+  }
+
+  const handletecnologias = () => {
+    api
+      .get(`/users/${user.id}`)
+      .then((response) => setTecnologias(response.data.techs))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    return handletecnologias;
+  }, []);
+
   return (
     <Container>
-      {showTecnologiaCadastro && <TecnologiaCadastro />}
+      {showTecnologiaCadastro && (
+        <TecnologiaCadastro
+          handletecnologias={handletecnologias}
+          handleClick={handleClick}
+        />
+      )}
+      {showTecnologiaEditar && (
+        <TecnologiaEditar
+          handletecnologias={handletecnologias}
+          tecnologias={tecnologias}
+          idTecnologia={idTecnologia}
+          handleClick={handleClickEditar}
+        />
+      )}
       <Header>
         <div className="headerDiv">
           <img src={logo} alt="Logo Kenzie-hub" />
           <Button
+            onClick={handleLogOut}
             backGround="#212529"
             textColor="#F8F9FA"
             backGroundHover="#343B41"
@@ -35,7 +82,7 @@ const Home = () => {
       <DataHeader>
         <div className="dataHeaderDiv">
           <h1>Olá, {username}</h1>
-          <h2>Modulo salvo no storage</h2>
+          <h2>{user.course_module}</h2>
         </div>
       </DataHeader>
 
@@ -51,7 +98,17 @@ const Home = () => {
               onClick={handleClick}
             ></Button>
           </div>
-          <div className="listaDiv"></div>
+          <div className="listaDiv">
+            {tecnologias.map((tec, i) => {
+              return (
+                <CardTecnologia
+                  key={i}
+                  tecnologia={tec}
+                  handleClickEditar={handleClickEditar}
+                />
+              );
+            })}
+          </div>
         </div>
       </Content>
     </Container>

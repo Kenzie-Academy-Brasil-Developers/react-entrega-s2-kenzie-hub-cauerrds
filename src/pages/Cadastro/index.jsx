@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const options = [
   { value: "Primeiro módulo (Introdução ao Frontend)", label: "Modulo 1" },
@@ -45,7 +46,7 @@ const optionsTheme = (theme) => {
   };
 };
 
-const Cadastro = () => {
+const Cadastro = ({ autenticacao, setAutenticacao }) => {
   const history = useNavigate();
 
   const schema = yup.object().shape({
@@ -103,6 +104,12 @@ const Cadastro = () => {
         toast.error("Ops! Algo deu errado");
       });
   };
+
+  if (autenticacao) {
+    const user = JSON.parse(localStorage.getItem("@kenzieHub:user"));
+
+    history(`/home/${user.name}`);
+  }
 
   return (
     <Container>

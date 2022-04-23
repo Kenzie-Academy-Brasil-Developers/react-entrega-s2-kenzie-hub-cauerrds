@@ -42,9 +42,14 @@ const optionsTheme = (theme) => {
   };
 };
 
-const TecnologiaCadastro = ({ handleClick, handletecnologias }) => {
+const TecnologiaEditar = ({
+  handleClick,
+  idTecnologia,
+  tecnologias,
+  handletecnologias,
+}) => {
+  const tecnologia = tecnologias.find((tec) => tec.id === idTecnologia);
   const schema = yup.object().shape({
-    title: yup.string().required("Campo Obrigatório!"),
     status: yup.string().required("Campo Obrigatório!"),
   });
 
@@ -57,10 +62,12 @@ const TecnologiaCadastro = ({ handleClick, handletecnologias }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmitFnc = (data) => {
+  const onSubmitFnc = ({ status }) => {
+    const data = { status };
     const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
+    console.log(data);
     api
-      .post("/users/techs", data, {
+      .put(`/users/techs/${idTecnologia}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -68,9 +75,25 @@ const TecnologiaCadastro = ({ handleClick, handletecnologias }) => {
       .then((_) => {
         handletecnologias();
         handleClick();
-        toast.success("Tecnologia adicionada!");
+        toast.success("Tecnologia editada!");
       })
-      .catch((_) => toast.error("Ops! Algo deu errado"));
+      .catch((err) => console.log(err));
+  };
+
+  const deletar = () => {
+    const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
+    api
+      .delete(`/users/techs/${idTecnologia}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((_) => {
+        handletecnologias();
+        handleClick();
+        toast.success("Tecnologia deletada!");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -85,7 +108,8 @@ const TecnologiaCadastro = ({ handleClick, handletecnologias }) => {
             register={register}
             name="title"
             label="Nome"
-            placeholder="Ex: Javascript"
+            placeholder={tecnologia.title}
+            disabled
             //   error={errors.name?.message}
           />
           <div className="selectStatusDiv">
@@ -108,18 +132,29 @@ const TecnologiaCadastro = ({ handleClick, handletecnologias }) => {
               name={"status"}
             />
           </div>
-          <Button
-            type="submit"
-            backGround="#FF577F"
-            textColor="#FFFFFF"
-            backGroundHover="#FF427F"
-          >
-            Cadastrar Tecnologia
-          </Button>
+          <div className="buttonsDiv">
+            <Button
+              type="submit"
+              backGround="#59323F"
+              textColor="#FFFFFF"
+              backGroundHover="#FF427F"
+            >
+              Salvar alterações
+            </Button>
+            <Button
+              type="button"
+              onClick={deletar}
+              backGround="#868E96"
+              textColor="#F8F9FA"
+              backGroundHover="#343B41"
+            >
+              Excluir
+            </Button>
+          </div>
         </form>
       </Content>
     </Container>
   );
 };
 
-export { TecnologiaCadastro };
+export { TecnologiaEditar };

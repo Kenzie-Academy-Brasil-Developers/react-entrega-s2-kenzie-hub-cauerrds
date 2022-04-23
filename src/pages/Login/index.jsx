@@ -13,8 +13,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
-const Login = () => {
+const Login = ({ autenticacao, setAutenticacao }) => {
   const history = useNavigate();
 
   const schema = yup.object().shape({
@@ -45,11 +46,27 @@ const Login = () => {
       .then((response) => {
         toast.success("Login efetuado com sucesso");
         history(`/home/${response.data.user.name}`);
+        const { token } = response.data;
+        localStorage.clear();
+        localStorage.setItem(
+          "@kenzieHub:user",
+          JSON.stringify(response.data.user)
+        );
+        localStorage.setItem("@KenzieHub:token", JSON.stringify(token));
+        setAutenticacao(true);
       })
-      .catch((_) => {
+      .catch((err) => {
+        console.log(err);
         toast.error("Email ou Senha invalido");
       });
   };
+
+  if (autenticacao) {
+    const user = JSON.parse(localStorage.getItem("@kenzieHub:user"));
+    if (user) {
+      history(`/home/${user.name}`);
+    }
+  }
 
   return (
     <Container>

@@ -36,6 +36,7 @@ export const DataHeader = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     height: 100%;
+
     h1 {
       font-size: 18px;
       font-weight: 700;
@@ -44,6 +45,12 @@ export const DataHeader = styled.div`
     h2 {
       font-size: 0.8rem;
       color: var(--greyFont);
+    }
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 `;
@@ -74,6 +81,9 @@ export const Content = styled.div`
       width: 100%;
       background-color: var(--grey2);
       height: 300px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
     }
   }
 `;

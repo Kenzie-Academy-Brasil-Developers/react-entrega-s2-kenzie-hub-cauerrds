@@ -46,14 +46,19 @@ export const Content = styled.div`
       margin: 15px 0;
       color: var(--white);
     }
-    button {
-      width: 100%;
-      margin-top: 15px;
-    }
+
     .selectStatusDiv {
       color: var(--white);
       svg {
         color: #ffffff;
+      }
+    }
+    .buttonsDiv {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      button {
+        padding: 0 1.6rem;
       }
     }
   }
