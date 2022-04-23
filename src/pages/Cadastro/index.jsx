@@ -108,8 +108,18 @@ const Cadastro = ({ autenticacao, setAutenticacao }) => {
     api
       .post("/users", user)
       .then((response) => {
-        toast.success("Conta criada com sucesso!");
-        history(`/home/${response.data.name}`);
+        api.post("/sessions", { email, password }).then((res) => {
+          toast.success("Conta criada com sucesso!");
+          history(`/home/${res.data.user.name}`);
+          const { token } = res.data;
+          localStorage.clear();
+          localStorage.setItem(
+            "@kenzieHub:user",
+            JSON.stringify(res.data.user)
+          );
+          localStorage.setItem("@KenzieHub:token", JSON.stringify(token));
+          setAutenticacao(true);
+        });
       })
       .catch((err) => {
         toast.error("Ops! Algo deu errado");
