@@ -3,7 +3,7 @@ import { Inputs } from "../../components/Inputs";
 import { AnimationContainer, Container, Content } from "./styles";
 
 import logo from "../../assets/logo.svg";
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import Select from "react-select";
 import { Controller, useForm } from "react-hook-form";
@@ -12,7 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const options = [
   { value: "Primeiro módulo (Introdução ao Frontend)", label: "Modulo 1" },
@@ -48,6 +48,17 @@ const optionsTheme = (theme) => {
 
 const Cadastro = ({ autenticacao, setAutenticacao }) => {
   const history = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [inputShow, setInputShow] = useState("password");
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+    setInputShow("text");
+    if (inputShow === "text") {
+      setInputShow("password");
+    }
+  };
 
   const schema = yup.object().shape({
     name: yup.string().required("Campo Obrigatorio!"),
@@ -145,10 +156,11 @@ const Cadastro = ({ autenticacao, setAutenticacao }) => {
               error={errors.email?.message}
             />
             <Inputs
+              handleShowPassword={handleShowPassword}
               register={register}
               name="password"
-              icon={FaEye}
-              type="password"
+              icon={showPassword ? FaEye : FaEyeSlash}
+              type={inputShow}
               label="Senha"
               placeholder="Sua senha"
               error={errors.password?.message}
@@ -156,7 +168,6 @@ const Cadastro = ({ autenticacao, setAutenticacao }) => {
             <Inputs
               register={register}
               name="passwordConfirm"
-              icon={FaEye}
               type="password"
               label="Confirmar senha"
               placeholder="Confirme sua senha"

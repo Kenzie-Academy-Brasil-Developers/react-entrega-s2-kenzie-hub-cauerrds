@@ -1,6 +1,14 @@
 import { Container, InputContainer } from "./styles";
 
-const Inputs = ({ label, icon: Icon, register, name, error, ...rest }) => {
+const Inputs = ({
+  handleShowPassword,
+  label,
+  icon: Icon,
+  register,
+  name,
+  error,
+  ...rest
+}) => {
   return (
     <Container>
       <div className="label">
@@ -9,7 +17,7 @@ const Inputs = ({ label, icon: Icon, register, name, error, ...rest }) => {
       </div>
       <InputContainer>
         <input {...register(name)} {...rest} />
-        {Icon && <Icon />}
+        {Icon && <Icon onClick={handleShowPassword} />}
       </InputContainer>
     </Container>
   );

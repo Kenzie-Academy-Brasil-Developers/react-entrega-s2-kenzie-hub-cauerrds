@@ -2,7 +2,7 @@ import { AnimationContainer, Container } from "./styles";
 import { Content } from "./styles";
 
 import logo from "../../assets/logo.svg";
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { Inputs } from "../../components/Inputs";
 import { Button } from "../../components/Buttons";
@@ -13,10 +13,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Login = ({ autenticacao, setAutenticacao }) => {
   const history = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [inputShow, setInputShow] = useState("password");
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+    setInputShow("text");
+    if (inputShow === "text") {
+      setInputShow("password");
+    }
+  };
 
   const schema = yup.object().shape({
     email: yup
@@ -82,10 +93,11 @@ const Login = ({ autenticacao, setAutenticacao }) => {
               placeholder="caue_rrds@kenzie.com"
             />
             <Inputs
+              handleShowPassword={handleShowPassword}
               register={register}
               name="password"
-              icon={FaEye}
-              type="password"
+              icon={showPassword ? FaEye : FaEyeSlash}
+              type={inputShow}
               label="Senha"
               placeholder="Sua senha"
             />

@@ -80,7 +80,7 @@ export const Content = styled.div`
       padding: 2rem 1rem 2rem 1rem;
       width: 100%;
       background-color: var(--grey2);
-      height: 300px;
+      min-height: 200px;
       display: flex;
       flex-direction: column;
       row-gap: 15px;
