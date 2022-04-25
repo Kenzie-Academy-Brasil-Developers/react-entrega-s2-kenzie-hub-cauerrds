@@ -75,8 +75,7 @@ const TecnologiaEditar = ({
         handletecnologias();
         handleClick();
         toast.success("Tecnologia editada!");
-      })
-      .catch((err) => toast.error("Ops! Algo deu errado"));
+      });
   };
 
   const deletar = () => {

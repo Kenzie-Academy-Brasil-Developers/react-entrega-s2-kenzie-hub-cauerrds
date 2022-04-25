@@ -11,6 +11,7 @@ import { api } from "../../services/api";
 import { useEffect, useState } from "react";
 import { CardTecnologia } from "../../components/CardTecnologia";
 import { TecnologiaEditar } from "../../components/TecnologiaEditar";
+import { toast } from "react-toastify";
 
 const Home = ({ autenticacao, setAutenticacao }) => {
   const { username } = useParams();
@@ -40,7 +41,7 @@ const Home = ({ autenticacao, setAutenticacao }) => {
     api
       .get(`/users/${user.id}`)
       .then((response) => setTecnologias(response.data.techs))
-      .catch((_) => "Ops! Algo deu errado");
+      .catch((_) => toast.error("Ops! Algo deu errado"));
   };
 
   useEffect(() => {
