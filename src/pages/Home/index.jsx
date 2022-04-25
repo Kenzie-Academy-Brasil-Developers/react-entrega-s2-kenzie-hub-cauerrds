@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 
 import { Button } from "../../components/Buttons";
 import { TecnologiaCadastro } from "../../components/ TecnologiaCadastro";
@@ -32,12 +32,9 @@ const Home = ({ autenticacao, setAutenticacao }) => {
   };
   const handleLogOut = () => {
     localStorage.clear();
+    setAutenticacao(false);
     history("/");
   };
-
-  if (!autenticacao) {
-    history(`/`);
-  }
 
   const handletecnologias = () => {
     api

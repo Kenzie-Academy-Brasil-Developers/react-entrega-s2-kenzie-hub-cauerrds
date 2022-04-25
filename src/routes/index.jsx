@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import { Cadastro } from "../pages/Cadastro";
 import { Home } from "../pages/Home";
 
@@ -14,7 +14,7 @@ const RoutesComponent = () => {
     if (token) {
       return setAutenticacao(true);
     }
-  }, []);
+  }, [autenticacao]);
   return (
     <Routes>
       <Route
@@ -40,7 +40,16 @@ const RoutesComponent = () => {
       <Route
         exact
         path="/home/:username"
-        element={<Home autenticacao={autenticacao} />}
+        element={
+          autenticacao ? (
+            <Home
+              autenticacao={autenticacao}
+              setAutenticacao={setAutenticacao}
+            />
+          ) : (
+            <Navigate replace to="/" />
+          )
+        }
       />
     </Routes>
   );
