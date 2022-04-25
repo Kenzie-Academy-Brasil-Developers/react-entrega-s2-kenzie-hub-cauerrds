@@ -126,11 +126,11 @@ const Cadastro = ({ autenticacao, setAutenticacao }) => {
       });
   };
 
-  if (autenticacao) {
-    const user = JSON.parse(localStorage.getItem("@kenzieHub:user"));
+  // if (autenticacao) {
+  //   const user = JSON.parse(localStorage.getItem("@kenzieHub:user"));
 
-    history(`/home/${user.name}`);
-  }
+  //   history(`/home/${user.name}`);
+  // }
 
   return (
     <Container>

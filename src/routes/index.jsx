@@ -6,35 +6,51 @@ import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 
 const RoutesComponent = () => {
-  const [autenticacao, setAutenticacao] = useState(false);
+  const [autenticacao, setAutenticacao] = useState(
+    JSON.parse(localStorage.getItem("@KenzieHub:token"))
+  );
 
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
+  // useEffect(() => {
+  //   const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
 
-    if (token) {
-      return setAutenticacao(true);
-    }
-  }, [autenticacao]);
+  //   if (token) {
+  //     return setAutenticacao(true);
+  //   }
+  // }, [autenticacao]);
   return (
     <Routes>
       <Route
         exact
         path="/"
         element={
-          <Login
-            autenticacao={autenticacao}
-            setAutenticacao={setAutenticacao}
-          />
+          !autenticacao ? (
+            <Login
+              autenticacao={autenticacao}
+              setAutenticacao={setAutenticacao}
+            />
+          ) : (
+            <Home
+              autenticacao={autenticacao}
+              setAutenticacao={setAutenticacao}
+            />
+          )
         }
       />
       <Route
         exact
         path="/cadastro"
         element={
-          <Cadastro
-            autenticacao={autenticacao}
-            setAutenticacao={setAutenticacao}
-          />
+          !autenticacao ? (
+            <Cadastro
+              autenticacao={autenticacao}
+              setAutenticacao={setAutenticacao}
+            />
+          ) : (
+            <Home
+              autenticacao={autenticacao}
+              setAutenticacao={setAutenticacao}
+            />
+          )
         }
       />
       <Route

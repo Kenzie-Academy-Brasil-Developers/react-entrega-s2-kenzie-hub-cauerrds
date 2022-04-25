@@ -77,12 +77,12 @@ const Login = ({ autenticacao, setAutenticacao }) => {
       });
   };
 
-  if (autenticacao) {
-    const user = JSON.parse(localStorage.getItem("@kenzieHub:user"));
-    if (user) {
-      history(`/home/${user.name}`);
-    }
-  }
+  // if (autenticacao) {
+  //   const user = JSON.parse(localStorage.getItem("@kenzieHub:user"));
+  //   if (user) {
+  //     history(`/home/${user.name}`);
+  //   }
+  // }
 
   return (
     <Container>

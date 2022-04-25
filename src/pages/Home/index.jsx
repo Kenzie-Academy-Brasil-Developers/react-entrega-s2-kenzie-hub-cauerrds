@@ -1,4 +1,4 @@
-import { Navigate, useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import { Button } from "../../components/Buttons";
 import { TecnologiaCadastro } from "../../components/ TecnologiaCadastro";
@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { CardTecnologia } from "../../components/CardTecnologia";
 import { TecnologiaEditar } from "../../components/TecnologiaEditar";
 import { toast } from "react-toastify";
+import { useLinkClickHandler } from "react-router-dom";
 
 const Home = ({ autenticacao, setAutenticacao }) => {
   const { username } = useParams();
@@ -27,9 +28,9 @@ const Home = ({ autenticacao, setAutenticacao }) => {
     setShowTecnologiaCadastro(!showTecnologiaCadastro);
   };
 
-  const handleClickEditar = (e) => {
+  const handleClickEditar = (id) => {
     setShowTecnologiaEditar(!showTecnologiaEditar);
-    setIdTecnologia(e.target.id);
+    setIdTecnologia(id);
   };
   const handleLogOut = () => {
     localStorage.clear();
@@ -43,6 +44,11 @@ const Home = ({ autenticacao, setAutenticacao }) => {
       .then((response) => setTecnologias(response.data.techs))
       .catch((_) => toast.error("Ops! Algo deu errado"));
   };
+
+  // if (!autenticacao) {
+  //   console.log(autenticacao);
+  //   <Navigate to="/" />;
+  // }
 
   useEffect(() => {
     handletecnologias();
