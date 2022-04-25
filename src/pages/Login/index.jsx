@@ -30,6 +30,7 @@ const Login = ({ autenticacao, setAutenticacao }) => {
   };
 
   const handleClickCadastro = () => {
+    setAutenticacao(false);
     localStorage.clear();
     history("/cadastro");
   };

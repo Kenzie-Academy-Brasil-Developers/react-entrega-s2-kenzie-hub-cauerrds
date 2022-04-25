@@ -100,7 +100,7 @@ const TecnologiaEditar = ({
     <Container>
       <Content>
         <div className="tituloDiv">
-          <h1>Cadastrar Tecnologia </h1>
+          <h1>Editar Tecnologia</h1>
           <IoMdClose onClick={handleClick} />
         </div>
         <form onSubmit={handleSubmit(onSubmitFnc)}>
@@ -110,10 +110,16 @@ const TecnologiaEditar = ({
             label="Nome"
             placeholder={tecnologia.title}
             disabled
-            //   error={errors.name?.message}
           />
           <div className="selectStatusDiv">
-            <p>Selecionar status</p>
+            <p>
+              Selecionar status
+              {errors.status ? (
+                <span> - {errors.status?.message}</span>
+              ) : (
+                ""
+              )}{" "}
+            </p>
             <Controller
               control={control}
               render={({ field: { onChange, value, name, ref } }) => (

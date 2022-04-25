@@ -52,6 +52,9 @@ export const Content = styled.div`
       svg {
         color: #ffffff;
       }
+      span {
+        color: var(--pinkFont);
+      }
     }
     .buttonsDiv {
       display: flex;
