@@ -73,7 +73,6 @@ const Login = ({ autenticacao, setAutenticacao }) => {
         setAutenticacao(true);
       })
       .catch((err) => {
-        console.log(err);
         toast.error("Email ou Senha invalido");
       });
   };

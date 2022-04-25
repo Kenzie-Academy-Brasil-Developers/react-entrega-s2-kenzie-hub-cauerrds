@@ -65,7 +65,6 @@ const TecnologiaEditar = ({
   const onSubmitFnc = ({ status }) => {
     const data = { status };
     const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
-    console.log(data);
     api
       .put(`/users/techs/${idTecnologia}`, data, {
         headers: {
@@ -77,7 +76,7 @@ const TecnologiaEditar = ({
         handleClick();
         toast.success("Tecnologia editada!");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Ops! Algo deu errado"));
   };
 
   const deletar = () => {
@@ -93,7 +92,7 @@ const TecnologiaEditar = ({
         handleClick();
         toast.success("Tecnologia deletada!");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Ops! Algo deu errado"));
   };
 
   return (

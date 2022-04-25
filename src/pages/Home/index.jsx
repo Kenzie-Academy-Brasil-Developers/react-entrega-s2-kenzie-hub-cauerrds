@@ -43,7 +43,7 @@ const Home = ({ autenticacao, setAutenticacao }) => {
     api
       .get(`/users/${user.id}`)
       .then((response) => setTecnologias(response.data.techs))
-      .catch((err) => console.log(err));
+      .catch((_) => "Ops! Algo deu errado");
   };
 
   useEffect(() => {
